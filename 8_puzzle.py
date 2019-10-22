@@ -154,6 +154,9 @@ class Astar:
             nextNode = move(self.currentNode, x, y, x, y + 1)  # 空白与下边数字交换
             self.getEverySet(nextNode)
 
+    def showPath(self):
+        print("困了，明天再说。")
+
 if __name__ == '__main__':
     inputString = input("请输入按顺序输入起始位置，以空格间隔，以回车结束，最后一位数字后不要有空格。以下为位置序号：\n1, 2, 3\n4, 5, 6\n7, 8, 0\n以下为输入示例：1 8 4 2 3 0 7 5 6\n请输入：\n")
     if not re.match("([0-9]\s){8}\d", inputString):
@@ -164,7 +167,11 @@ if __name__ == '__main__':
         print("该情况无解！")
     else:
         startTime = time.time()  # 开始时间
-        Astar(start, target)
-        endTime = time.time()  # 结束时间
-        timeCost = endTime - startTime  # 时间消耗
-        print("启发式搜索算法用时%f秒" % (timeCost))
+        result = Astar(start, target)
+        if result.start():
+            result.showPath()
+            endTime = time.time()  # 结束时间
+            timeCost = endTime - startTime  # 时间消耗
+            print("启发式搜索算法用时%f秒" % (timeCost))
+        else:
+            print("该情况无解或没算出来？")
