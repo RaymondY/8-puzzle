@@ -27,3 +27,12 @@
     * 若在table open中 && new F smaller，则update F = G + H
     * 否则加入table open
 5. 返回step 2.
+
+## 结果
+基本达成了目的，缺少更多的测试
+
+## 反思
+1. python中复杂数据结构的‘=’传递的是地址，指向的内存没有变化。
+最开始没有使用`copy.deepcopy()`导致class中一些公有变量出乎意料的发生了变化。
+2. 最开始Astar算法部分没有使用class，而是用的function。导致一些参数传递非常复杂，已修正。
+3. 开始没注意到`list = string.split()`时，list中的元素不是数字，而是字符串。
