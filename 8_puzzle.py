@@ -182,24 +182,22 @@ class Astar:
             showBoard(node.statement)
 
 if __name__ == '__main__':
-    inputString = input("请输入按顺序输入起始位置，以空格间隔，以回车结束，最后一位数字后不要有空格。以下为位置序号：\n2, 8, 3\n1, 0, 5\n4, 7, 6\n以下为输入示例：1 8 4 2 3 0 7 5 6\n请输入：\n")
-    if re.match("([0-9]\s){8}\d", inputString):
-
-        start = inputString.split()     # 开始状态
-        target = ['1', '2', '3', '4', '5', '6', '7', '8', '0']     # 目标状态
-        if not parityCheck(start, target):
-            print("该情况无解！")
-        else:
-            startTime = time.time()  # 开始时间
-            result = Astar(start, target)
-            if result.start():
-                print("采用以下方式：")
-                result.showPath()
-                endTime = time.time()  # 结束时间
-                timeCost = endTime - startTime  # 时间消耗
-                print("共用%d步" %(result.step))
-                print("启发式搜索算法用时%f秒" %(timeCost))
-            else:
-                print("该情况无解或没算出来？")
+    inputString = input("请输入按顺序输入起始位置，以空格间隔，以回车结束，最后一位数字后不要有空格。以下为位置序号：\n1, 2, 3\n4, 5, 6\n7, 8, 9\n以下为输入示例：2 8 3 1 0 5 4 7 6\n请输入：\n")
+    while not re.match("([0-9]\s){8}\d", inputString):
+        inputString = input("输入错误！请重新输入：")
+    start = inputString.split()  # 开始状态
+    target = ['1', '2', '3', '4', '5', '6', '7', '8', '0']  # 目标状态
+    if not parityCheck(start, target):
+        print("该情况无解！")
     else:
-        print("输入格式不正确！")
+        startTime = time.time()  # 开始时间
+        result = Astar(start, target)
+        if result.start():
+            print("采用以下方式：")
+            result.showPath()
+            endTime = time.time()  # 结束时间
+            timeCost = endTime - startTime  # 时间消耗
+            print("共用%d步" % (result.step))
+            print("启发式搜索算法用时%f秒" % (timeCost))
+        else:
+            print("该情况无解或没算出来？")
