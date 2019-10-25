@@ -12,16 +12,18 @@ class Node:
         self.G = 0
         self.H = 0
 # Use "Manhattan Distance" in "H"
-    def setH(self, target):
-        for i in range(0, 3):
-            for j in range(0, 3):
-                index = i * 3 + j
-                if (index == 8):
-                    continue
-                else:
-                    x = int(target[index]) % 3
-                    y = int(target[index]) // 3
-                    self.H += abs(x - i) + abs(y - j)
+    def setH(self):
+        sum = 0
+        for index in range(0, 9):
+            temp = int(self.statement[index]) - 1
+            if (temp == -1):
+                temp = 8
+            targetX = temp % 3
+            targetY = temp // 3
+            selfX = index % 3
+            selfY = index // 3
+            sum += abs(targetX - selfX) + abs(targetY - selfY)
+        self.H = sum
 
     def setG(self, G):
         self.G = G
@@ -45,12 +47,12 @@ def getReverse(statement):
         for j in range(0, i):
             if (statement[j] > statement[i]):
                 sum += 1
-        # if(statement[i] == 0):
-        #     continue
-        # else:
-        #     for j in range(0, i):
-        #         if(statement[j]>statement[i]):
-        #             sum += 1
+        if(statement[i] == 0):
+            continue
+        else:
+            for j in range(0, i):
+                if(statement[j]>statement[i]):
+                    sum += 1
     return sum  # 奇偶序列结果，判断sum的奇偶性即可
 
 def parityCheck(start, target):
@@ -86,12 +88,16 @@ class Astar:
         self.step = 0
 
     def start(self):
-        self.startNode.setH(self.target)
+        self.startNode.setH()
         self.startNode.setG(self.step)
         self.openTable.append(self.startNode)
 
         while True:
             self.currentNode = self.getMinF()
+            # showBoard(self.currentNode.statement)
+            # print(self.currentNode.getG())
+            # print(self.currentNode.getF())
+            # print(self.step)
             self.closeTable.append(self.currentNode)
             self.openTable.remove(self.currentNode)
             self.step = self.currentNode.getG()
@@ -145,7 +151,7 @@ class Astar:
             # 2. 不在openTable，则加入
             if not self.nodeInOpenTable(nextNode):
                 nextNode.setG(tempG)
-                nextNode.setH(self.target)
+                nextNode.setH()
                 nextNode.setFather(self.currentNode)
                 self.openTable.append(nextNode)
             # 3. 在openTable中，计算新的G，若smaller，则update openTable
