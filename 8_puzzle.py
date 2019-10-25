@@ -117,6 +117,9 @@ class Astar:
             # 以防万一 设置无解情况
             elif (len(self.openTable) == 0):
                 return False
+            # 设置最大深度为30步。可调整
+            elif (self.step == 30):
+                return False
             # 否则生成下一步所有能转移的状态集S
 
     def nodeInOpenTable(self, node):
@@ -206,4 +209,4 @@ if __name__ == '__main__':
             print("共用%d步" % (result.step))
             print("启发式搜索算法用时%f秒" % (timeCost))
         else:
-            print("该情况无解或没算出来？")
+            print("该情况搜索深度超过30，或无解。")
