@@ -118,7 +118,7 @@ class Astar:
             elif (len(self.openTable) == 0):
                 return False
             # 设置最大深度为30步。可调整
-            elif (self.step == 30):
+            elif (self.step > 30):
                 return False
             # 否则生成下一步所有能转移的状态集S
 
