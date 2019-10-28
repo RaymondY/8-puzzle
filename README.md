@@ -1,4 +1,5 @@
 <font face='Monaco'>
+
 # 8-puzzle problem
 
 > 1712950 杨添凯
@@ -38,18 +39,6 @@
     * 若在table open中 && new F smaller，则update F = G + H
     * 否则加入table open
 5. 返回step 2.
-
-## Program
-
-> Python 3.7
-> 
-> Test:
-
-1. Input message: ![q](/Users/Raymond/Desktop/1.png)
-    * Wrong format message: <img src='/Users/Raymond/Desktop/2.png' width=60%>
-    * No answer situation: <img src='/Users/Raymond/Desktop/3.png' width=62%>
-2. Show the 'path', 'step num' and 'time cost': ![q](/Users/Raymond/Desktop/4.png)<img src='/Users/Raymond/Desktop/5.png' width=50%><img src='/Users/Raymond/Desktop/6.png' width=50%>
-3. And I set the max degree of searching (30).
 
 ## Problem
 
